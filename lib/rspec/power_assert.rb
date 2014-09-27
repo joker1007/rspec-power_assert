@@ -13,8 +13,13 @@ module RSpec
       end
 
       if result
-        RSpec::Matchers.last_expectation_handler = DummyExpectationHandler
         RSpec::Matchers.last_matcher = DummyAssertionMatcher.new(msg)
+
+        if RSpec::Matchers.respond_to?(:last_should=)
+          RSpec::Matchers.last_should = "" # for RSpec 2
+        else
+          RSpec::Matchers.last_expectation_handler = DummyExpectationHandler # for RSpec 3
+        end
       else
         raise RSpec::Expectations::ExpectationNotMetError, msg
       end
