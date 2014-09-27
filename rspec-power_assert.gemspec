@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Rspec::PowerAssert::VERSION
   spec.authors       = ["joker1007"]
   spec.email         = ["kakyoin.hierophant@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Power Assert for RSpec.}
+  spec.description   = %q{Power Assert for RSpec..}
+  spec.homepage      = "https://github.com/joker1007/rspec-power_assert"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -23,6 +23,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "byebug"
 end
