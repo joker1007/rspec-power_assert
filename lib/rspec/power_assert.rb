@@ -13,7 +13,7 @@ module RSpec
       end
 
       if result
-        RSpec::Matchers.last_expectation_handler ||= DummyExpectationHandler
+        RSpec::Matchers.last_expectation_handler = DummyExpectationHandler
         RSpec::Matchers.last_matcher = DummyAssertionMatcher.new(msg)
       else
         raise RSpec::Expectations::ExpectationNotMetError, msg
@@ -23,7 +23,7 @@ module RSpec
     # for generating description
     class DummyExpectationHandler
       def self.verb
-        "should"
+        ""
       end
     end
 
@@ -34,7 +34,7 @@ module RSpec
       end
 
       def description
-        "be\n#{@msg}"
+        "\n#{@msg}"
       end
     end
   end

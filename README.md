@@ -40,6 +40,12 @@ describe Array do
     end
 
     it do
+      is_expected.to eq %w(a b c)
+      is_asserted_by { subject.map(&:upcase) == %w(A B C) }
+    end
+
+    it "should transform array" do
+      is_expected.to eq %w(a b c)
       is_asserted_by { subject.map(&:upcase) == %w(A B C) }
     end
   end
@@ -53,12 +59,12 @@ Rspec::PowerAssert
     #map
       example at ./spec/rspec/power_assert_spec.rb:13 (FAILED - 1)
       example at ./spec/rspec/power_assert_spec.rb:17 (FAILED - 2)
-      should be
-        is_asserted_by { subject.map(&:upcase) == %w(A B C) }
+      is_asserted_by { subject.map(&:upcase) == %w(A B C) }
                          |       |             |
                          |       |             true
                          |       ["A", "B", "C"]
                          ["a", "b", "c"]
+      should transform array
 
 Failures:
 
@@ -83,8 +89,8 @@ Failures:
      # ./lib/rspec/power_assert.rb:19:in `is_asserted_by'
      # ./spec/rspec/power_assert_spec.rb:20:in `block (4 levels) in <top (required)>'
 
-Finished in 0.00223 seconds (files took 0.12145 seconds to load)
-3 examples, 2 failures
+Finished in 0.00455 seconds (files took 0.10298 seconds to load)
+4 examples, 2 failures
 
 Failed examples:
 

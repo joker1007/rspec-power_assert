@@ -21,6 +21,12 @@ describe Rspec::PowerAssert do
       end
 
       it do
+        is_expected.to eq %w(a b c)
+        is_asserted_by { subject.map(&:upcase) == %w(A B C) }
+      end
+
+      it "should transform array" do
+        is_expected.to eq %w(a b c)
         is_asserted_by { subject.map(&:upcase) == %w(A B C) }
       end
     end
