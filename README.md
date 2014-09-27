@@ -1,7 +1,5 @@
 # Rspec::PowerAssert
 
-TODO: Write a gem description
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -96,7 +94,7 @@ rspec ./spec/rspec/power_assert_spec.rb:17 # Rspec::PowerAssert Array#map
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/rspec-power_assert/fork )
+1. Fork it ( https://github.com/joker1007/rspec-power_assert/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
