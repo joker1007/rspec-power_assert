@@ -1,5 +1,8 @@
 # Rspec::PowerAssert
 
+## Support
+- RSpec 2.14 or later
+
 ## Installation
 
 Add this line to your application's Gemfile:
