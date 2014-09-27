@@ -1,4 +1,5 @@
 # Rspec::PowerAssert
+[![Gem Version](https://badge.fury.io/rb/rspec-power_assert.svg)](http://badge.fury.io/rb/rspec-power_assert)
 
 ## Support
 - RSpec 2.14 or later
