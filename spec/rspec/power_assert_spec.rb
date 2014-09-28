@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.extend RSpec::ThenAssertion
+end
+
 describe Rspec::PowerAssert do
   describe Array do
     describe "#map" do
@@ -29,6 +33,18 @@ describe Rspec::PowerAssert do
         is_expected.to eq %w(a b c)
         is_asserted_by { subject.map(&:upcase) == %w(A B C) }
       end
+
+      it_is_asserted_by { subject.map(&:upcase) == %w(A B C) }
+
+      it_is_asserted_by do
+        subject.map(&:upcase) == %w(A B C)
+      end
+
+      it_is_asserted_by "succ each element" do
+        subject.map(&:succ) == ["b", "c", "e"] + @array
+      end
+
+      Then { subject.map(&:upcase) == %w(A B C) }
     end
   end
 end
