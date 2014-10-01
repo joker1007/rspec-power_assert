@@ -34,6 +34,20 @@ describe Object do
 end
 ```
 
+## Config
+
+### verbose_successful_report
+
+```ruby
+RSpec::PowerAssert.verbose_successful_report = true
+```
+
+If it set true, Successful Example reports with `power_assert` outputs.
+If it set false, Successful Example reports without `power_assert` outputs.
+
+Default is *true*.
+
+## Sample
 ### spec sample
 ```ruby
 describe Rspec::PowerAssert do

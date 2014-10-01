@@ -23,6 +23,16 @@ end
 
 module RSpec
   module PowerAssert
+    @verbose_successful_report = true
+
+    def self.verbose_successful_report
+      !!@verbose_successful_report
+    end
+
+    def self.verbose_successful_report=(verbose)
+      @verbose_successful_report = verbose
+    end
+
     def is_asserted_by(&blk)
       result, msg = ::PowerAssert.start(blk, assertion_method: __method__) do |tp|
         [tp.yield, tp.message_proc.call]
@@ -67,7 +77,8 @@ module RSpec
     private_constant :DummyExpectationHandler
 
     class DummyAssertionMatcher
-      INDENT_LEVEL = 8
+      INDENT_LEVEL = 12
+
       def initialize(msg, method_name)
         @msg = msg
         @assertion_method = method_name
@@ -82,20 +93,25 @@ module RSpec
           offset = display_message.length + 3 - $1.length
         end
 
-        "\n#{build_message(output, offset)}"
+        "#{$/}#{build_message(output, offset)}"
       end
 
       private
 
       def build_message(output, offset)
-        output.each_line.with_index.map do |l, idx|
-          next l if idx == 0
-          if offset > 1
-            " " * offset + l
-          else
-            l.each_char.drop(offset.abs).join
-          end
-        end.join
+        if RSpec::PowerAssert.verbose_successful_report
+          output.each_line.with_index.map do |l, idx|
+            next l if idx == 0
+
+            if offset > 1
+              " " * offset + l
+            else
+              l.each_char.drop(offset.abs).join
+            end
+          end.join
+        else
+          output.each_line.first
+        end
       end
 
       def display_message
