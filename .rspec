@@ -1,2 +1,3 @@
+-r power_assert
 --format documentation
 --color
