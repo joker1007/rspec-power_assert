@@ -22,6 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
+First, add require option to `.rspec`
+
+```
+-r power_assert
+```
+
 Use `ExampleGroup.it_is_asserted_by` or `ExampleGroup#is_asserted_by`
 
 ```ruby
