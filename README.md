@@ -53,6 +53,20 @@ If it set false, Successful Example reports without `power_assert` outputs.
 
 Default is *true*.
 
+### example_assertion_alias
+
+```ruby
+# enable `assert` method in Example block
+RSpec::PowerAssert.example_assertion_alias :assert
+```
+
+### example_group_assertion_alias
+
+```ruby
+# enable `assert` method in ExampleGroup block
+RSpec::PowerAssert.example_group_assertion_alias :assert
+```
+
 ## Sample
 ### spec sample
 ```ruby

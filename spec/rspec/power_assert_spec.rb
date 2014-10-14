@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+RSpec::PowerAssert.example_assertion_alias :assert
+RSpec::PowerAssert.example_group_assertion_alias :assert
+
 describe Rspec::PowerAssert do
   describe Array do
     describe "#map" do
@@ -12,6 +15,10 @@ describe Rspec::PowerAssert do
 
       it do
         is_asserted_by { subject.map(&:upcase) == array }
+      end
+
+      it do
+        assert { subject.map(&:upcase) == array }
       end
 
       it do
@@ -47,7 +54,11 @@ describe Rspec::PowerAssert do
 
       it_is_asserted_by { subject.map(&:upcase) == %w(A B C) }
 
+      assert { subject.map(&:upcase) == %w(A B C) }
+
       it_is_asserted_by { subject.map(&:upcase) == %w(A B) }
+
+      assert { subject.map(&:upcase) == %w(A B) }
 
       it_is_asserted_by do
         subject.map(&:upcase) == %w(A B C)
