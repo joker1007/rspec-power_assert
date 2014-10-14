@@ -33,12 +33,20 @@ module RSpec
       @verbose_successful_report = verbose
     end
 
+    def self.example_assertion_alias(name)
+      alias_method(name.to_sym, :is_asserted_by)
+    end
+
+    def self.example_group_assertion_alias(name)
+      PowerAssertExtensions.assertion_method_alias(name)
+    end
+
     def is_asserted_by(&blk)
-      result, msg = ::PowerAssert.start(blk, assertion_method: __method__) do |tp|
+      result, msg = ::PowerAssert.start(blk, assertion_method: __callee__) do |tp|
         [tp.yield, tp.message_proc.call]
       end
 
-      handle_result_and_message(result, msg, __method__)
+      handle_result_and_message(result, msg, __callee__)
     end
 
     private
@@ -122,10 +130,14 @@ module RSpec
   end
 
   module PowerAssertExtensions
+    def self.assertion_method_alias(name)
+      alias_method name.to_sym, :it_is_asserted_by
+    end
+
     def it_is_asserted_by(description = nil, &blk)
       file, lineno = blk.source_location
       cmd = description ? "it(description)" : "specify"
-      eval %{#{cmd} do evaluate_example("#{__method__}", &blk) end}, binding, file, lineno
+      eval %{#{cmd} do evaluate_example("#{__callee__}", &blk) end}, binding, file, lineno
     end
   end
 end
