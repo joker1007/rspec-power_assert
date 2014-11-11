@@ -4,8 +4,8 @@ require "power_assert"
 
 module PowerAssert
   class << self
-    def rspec_start(assertion_proc, assertion_method: nil)
-      yield RSpecContext.new(assertion_proc, assertion_method)
+    def rspec_start(assertion_proc, assertion_method: nil, source_binding: TOPLEVEL_BINDING)
+      yield RSpecContext.new(assertion_proc, assertion_method, source_binding)
     end
   end
 
