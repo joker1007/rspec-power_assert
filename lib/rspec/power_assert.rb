@@ -46,7 +46,8 @@ module RSpec
         [tp.yield, tp.message_proc.call]
       end
 
-      handle_result_and_message(result, msg, __callee__)
+      location = blk.source_location.join(":")
+      handle_result_and_message(result, msg, __callee__, location)
     end
 
     private
@@ -59,10 +60,11 @@ module RSpec
         [tp.yield, tp.message_proc.call]
       end
 
-      handle_result_and_message(result, msg, method_name)
+      location = blk.source_location.join(":")
+      handle_result_and_message(result, msg, method_name, location)
     end
 
-    def handle_result_and_message(result, msg, method_name)
+    def handle_result_and_message(result, msg, method_name, location)
       if result
         RSpec::Matchers.last_matcher = DummyAssertionMatcher.new(msg, method_name.to_s)
 
@@ -72,7 +74,9 @@ module RSpec
           RSpec::Matchers.last_expectation_handler = DummyExpectationHandler # for RSpec 3
         end
       else
-        raise RSpec::Expectations::ExpectationNotMetError, msg
+        ex = RSpec::Expectations::ExpectationNotMetError.new(msg)
+        ex.set_backtrace(location)
+        raise ex
       end
     end
 
@@ -135,9 +139,11 @@ module RSpec
     end
 
     def it_is_asserted_by(description = nil, &blk)
-      file, lineno = blk.source_location
-      cmd = description ? "it(description)" : "specify"
-      eval %{#{cmd} do evaluate_example("#{__callee__}", &blk) end}, binding, file, lineno
+      file, _lineno = blk.source_location
+      backtrace = caller.drop_while {|l| l !~ /#{Regexp.escape(file)}/}
+      it description, caller: backtrace do
+        evaluate_example(__callee__, &blk)
+      end
     end
   end
 end
