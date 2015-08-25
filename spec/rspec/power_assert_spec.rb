@@ -67,6 +67,38 @@ describe Rspec::PowerAssert do
       it_is_asserted_by "succ each element" do
         subject.map(&:succ) == ["b", "c", "e"] + @array
       end
+
+      context "When use aggregate_failures" do
+        before do
+          unless respond_to?(:aggregate_failures)
+            pending_message = "This test can run only on RSpec 3.3+"
+
+            if respond_to?(:skip)
+              # for RSpec 3
+              skip pending_message
+            else
+              # for RSpec 2
+              pending pending_message
+            end
+          end
+        end
+
+        it "should be called expect with 3 times" do
+          aggregate_failures do
+            expect(subject.map(&:upcase)).to eq %w(a b c)
+            expect(subject.map(&:upcase)).to eq %w(A B C)
+            expect(subject.map(&:upcase)).to eq %w(A B C D)
+          end
+        end
+
+        it "should be called is_asserted_by with 3 times" do
+          aggregate_failures do
+            is_asserted_by { subject.map(&:upcase) == %w(a b c) }
+            is_asserted_by { subject.map(&:upcase) == %w(A B C) }
+            is_asserted_by { subject.map(&:upcase) == %w(A B C D) }
+          end
+        end
+      end
     end
   end
 end

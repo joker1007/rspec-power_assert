@@ -75,8 +75,15 @@ module RSpec
         end
       else
         ex = RSpec::Expectations::ExpectationNotMetError.new(msg)
-        ex.set_backtrace(location)
-        raise ex
+
+        if defined?(RSpec::Support) && RSpec::Support.respond_to?(:notify_failure)
+          # for RSpec 3.3+
+          RSpec::Support.notify_failure(ex)
+        else
+          # for RSpec 2, 3.0, 3.1, 3.2
+          ex.set_backtrace(location)
+          raise ex
+        end
       end
     end
 
