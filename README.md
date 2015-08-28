@@ -252,6 +252,38 @@ rspec ./spec/rspec/power_assert_spec.rb:50 # Rspec::PowerAssert Array#map
 rspec ./spec/rspec/power_assert_spec.rb:56 # Rspec::PowerAssert Array#map succ each element
 ```
 
+On RSpec-3.3 or later, support `aggregate_failures`
+(Thanks sue445)
+
+```
+  2) Rspec::PowerAssert Array#map When use aggregate_failures should be called be is_asserted_by with 3 times
+     Got 2 failures from failure aggregation block.
+     # ./spec/rspec/power_assert_spec.rb:81:in `block (5 levels) in <top (required)>'
+
+     2.1) Failure/Error: is_asserted_by { subject.map(&:upcase) == %w(a b c) }
+                        is_asserted_by { subject.map(&:upcase) == %w(a b c) }
+                                         |       |             |
+                                         |       |             false
+                                         |       ["A", "B", "C"]
+                                         ["a", "b", "c"]
+          # ./lib/rspec/power_assert.rb:81:in `handle_result_and_message'
+          # ./lib/rspec/power_assert.rb:50:in `is_asserted_by'
+          # ./spec/rspec/power_assert_spec.rb:82:in `block (6 levels) in <top (required)>'
+
+     2.2) Failure/Error: is_asserted_by { subject.map(&:upcase) == %w(A B C D) }
+                        is_asserted_by { subject.map(&:upcase) == %w(A B C D) }
+                                         |       |             |
+                                         |       |             false
+                                         |       ["A", "B", "C"]
+                                         ["a", "b", "c"]
+          # ./lib/rspec/power_assert.rb:81:in `handle_result_and_message'
+          # ./lib/rspec/power_assert.rb:50:in `is_asserted_by'
+          # ./spec/rspec/power_assert_spec.rb:84:in `block (6 levels) in <top (required)>'
+
+Finished in 0.02937 seconds (files took 0.19416 seconds to load)
+2 examples, 2 failures
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/joker1007/rspec-power_assert/fork )
