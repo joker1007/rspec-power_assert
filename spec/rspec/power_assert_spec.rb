@@ -101,4 +101,35 @@ describe Rspec::PowerAssert do
       end
     end
   end
+
+  describe Object do
+    before do
+      PowerAssert.configure do |c|
+        c._trace_alias_method = true
+      end
+    end
+
+    after do
+      PowerAssert.configure do |c|
+        c._trace_alias_method = false
+      end
+    end
+
+    let(:object) {
+      Class.new {
+        def foo
+          :foo
+        end
+
+        alias alias_of_iseq foo
+        alias alias_of_cfunc to_s
+      }
+    }
+
+    subject { object.new }
+
+    it do
+      is_asserted_by { subject.alias_of_iseq == :bar }
+    end
+  end
 end
