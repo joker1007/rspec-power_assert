@@ -25,7 +25,7 @@ Or install it yourself as:
 First, add require option to `.rspec`
 
 ```
--r power_assert
+-r rspec-power_assert
 ```
 
 Use `ExampleGroup.it_is_asserted_by` or `ExampleGroup#is_asserted_by`
