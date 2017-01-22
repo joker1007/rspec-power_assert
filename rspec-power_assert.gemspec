@@ -5,7 +5,7 @@ require 'rspec/power_assert/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "rspec-power_assert"
-  spec.version       = Rspec::PowerAssert::VERSION
+  spec.version       = RSpec::PowerAssert::VERSION
   spec.authors       = ["joker1007"]
   spec.email         = ["kakyoin.hierophant@gmail.com"]
   spec.summary       = %q{Power Assert for RSpec.}

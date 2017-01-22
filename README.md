@@ -1,4 +1,4 @@
-# Rspec::PowerAssert
+# RSpec::PowerAssert
 [![Gem Version](https://badge.fury.io/rb/rspec-power_assert.svg)](http://badge.fury.io/rb/rspec-power_assert)
 
 ## Support
@@ -70,7 +70,7 @@ RSpec::PowerAssert.example_group_assertion_alias :assert
 ## Sample
 ### spec sample
 ```ruby
-describe Rspec::PowerAssert do
+describe RSpec::PowerAssert do
   describe Array do
     describe "#map" do
       let(:array) { [1, 2, 3] }
@@ -133,7 +133,7 @@ end
 
 ### output sample
 ```
-Rspec::PowerAssert
+RSpec::PowerAssert
   Array
     #map
       example at ./spec/rspec/power_assert_spec.rb:13 (FAILED - 1)
@@ -170,7 +170,7 @@ Rspec::PowerAssert
 
 Failures:
 
-  1) Rspec::PowerAssert Array#map
+  1) RSpec::PowerAssert Array#map
      Failure/Error: is_asserted_by { subject.map(&:upcase) == array }
                is_asserted_by { subject.map(&:upcase) == array }
                                 |       |             |  |
@@ -182,7 +182,7 @@ Failures:
      # ./lib/rspec/power_assert.rb:31:in `is_asserted_by'
      # ./spec/rspec/power_assert_spec.rb:14:in `block (4 levels) in <top (required)>'
 
-  2) Rspec::PowerAssert Array#map
+  2) RSpec::PowerAssert Array#map
      Failure/Error: is_asserted_by {
                  subject.map(&:upcase) == array
                  |       |             |  |
@@ -194,7 +194,7 @@ Failures:
      # ./lib/rspec/power_assert.rb:31:in `is_asserted_by'
      # ./spec/rspec/power_assert_spec.rb:18:in `block (4 levels) in <top (required)>'
 
-  3) Rspec::PowerAssert Array#map
+  3) RSpec::PowerAssert Array#map
      Failure/Error: is_asserted_by { upcased == @array }
                is_asserted_by { upcased == @array }
                                 |       |  |
@@ -205,7 +205,7 @@ Failures:
      # ./lib/rspec/power_assert.rb:31:in `is_asserted_by'
      # ./spec/rspec/power_assert_spec.rb:36:in `block (4 levels) in <top (required)>'
 
-  4) Rspec::PowerAssert Array#map should transform array (failed)
+  4) RSpec::PowerAssert Array#map should transform array (failed)
      Failure/Error: is_asserted_by { subject.map(&:upcase) == %w(A B) }
                is_asserted_by { subject.map(&:upcase) == %w(A B) }
                                 |       |             |
@@ -216,7 +216,7 @@ Failures:
      # ./lib/rspec/power_assert.rb:31:in `is_asserted_by'
      # ./spec/rspec/power_assert_spec.rb:45:in `block (4 levels) in <top (required)>'
 
-  5) Rspec::PowerAssert Array#map
+  5) RSpec::PowerAssert Array#map
      Failure/Error: it_is_asserted_by { subject.map(&:upcase) == %w(A B) }
              it_is_asserted_by { subject.map(&:upcase) == %w(A B) }
                                  |       |             |
@@ -227,7 +227,7 @@ Failures:
      # ./lib/rspec/power_assert.rb:44:in `evaluate_example'
      # ./spec/rspec/power_assert_spec.rb:50:in `block in it_is_asserted_by'
 
-  6) Rspec::PowerAssert Array#map succ each element
+  6) RSpec::PowerAssert Array#map succ each element
      Failure/Error: it_is_asserted_by "succ each element" do
                subject.map(&:succ) == ["b", "c", "e"] + @array
                |       |           |                    |
@@ -244,19 +244,19 @@ Finished in 0.01725 seconds (files took 0.12235 seconds to load)
 
 Failed examples:
 
-rspec ./spec/rspec/power_assert_spec.rb:13 # Rspec::PowerAssert Array#map
-rspec ./spec/rspec/power_assert_spec.rb:17 # Rspec::PowerAssert Array#map
-rspec ./spec/rspec/power_assert_spec.rb:33 # Rspec::PowerAssert Array#map
-rspec ./spec/rspec/power_assert_spec.rb:44 # Rspec::PowerAssert Array#map should transform array (failed)
-rspec ./spec/rspec/power_assert_spec.rb:50 # Rspec::PowerAssert Array#map
-rspec ./spec/rspec/power_assert_spec.rb:56 # Rspec::PowerAssert Array#map succ each element
+rspec ./spec/rspec/power_assert_spec.rb:13 # RSpec::PowerAssert Array#map
+rspec ./spec/rspec/power_assert_spec.rb:17 # RSpec::PowerAssert Array#map
+rspec ./spec/rspec/power_assert_spec.rb:33 # RSpec::PowerAssert Array#map
+rspec ./spec/rspec/power_assert_spec.rb:44 # RSpec::PowerAssert Array#map should transform array (failed)
+rspec ./spec/rspec/power_assert_spec.rb:50 # RSpec::PowerAssert Array#map
+rspec ./spec/rspec/power_assert_spec.rb:56 # RSpec::PowerAssert Array#map succ each element
 ```
 
 On RSpec-3.3 or later, support `aggregate_failures`
 (Thanks sue445)
 
 ```
-  2) Rspec::PowerAssert Array#map When use aggregate_failures should be called be is_asserted_by with 3 times
+  2) RSpec::PowerAssert Array#map When use aggregate_failures should be called be is_asserted_by with 3 times
      Got 2 failures from failure aggregation block.
      # ./spec/rspec/power_assert_spec.rb:81:in `block (5 levels) in <top (required)>'
 
