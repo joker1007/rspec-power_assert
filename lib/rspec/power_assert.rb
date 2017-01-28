@@ -3,22 +3,7 @@ require "rspec/core"
 require "power_assert"
 
 module PowerAssert
-  class << self
-    def rspec_start(assertion_proc, assertion_method: nil, source_binding: TOPLEVEL_BINDING)
-      yield RSpecContext.new(assertion_proc, assertion_method, source_binding)
-    end
-  end
-
-  class RSpecContext < Context
-    # hack for context changing
-    def do_yield
-      @trace.enable do
-        @base_caller_length = caller_locations.length + 2
-        yield
-      end
-    end
-  end
-  private_constant :RSpecContext
+  IGNORED_LIB_DIRS[Rspec::PowerAssert]  = __dir__
 end
 
 module RSpec
@@ -56,7 +41,7 @@ module RSpec
       # hack for context changing
       pr = -> { self.instance_exec(&blk) }
 
-      result, msg = ::PowerAssert.rspec_start(pr, assertion_method: method_name) do |tp|
+      result, msg = ::PowerAssert.start(pr, assertion_method: method_name) do |tp|
         [tp.yield, tp.message_proc.call]
       end
 
