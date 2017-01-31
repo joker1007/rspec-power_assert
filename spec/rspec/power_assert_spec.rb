@@ -18,6 +18,12 @@ describe RSpec::PowerAssert do
       end
 
       it do
+        is_asserted_by do
+          subject.map(&:upcase) == array
+        end
+      end
+
+      it do
         assert { subject.map(&:upcase) == array }
       end
 
