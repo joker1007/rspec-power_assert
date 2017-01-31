@@ -3,7 +3,7 @@ require "rspec/core"
 require "power_assert"
 
 module PowerAssert
-  IGNORED_LIB_DIRS[Rspec::PowerAssert]  = __dir__
+  IGNORED_LIB_DIRS[RSpec::PowerAssert]  = __dir__
 end
 
 module RSpec
