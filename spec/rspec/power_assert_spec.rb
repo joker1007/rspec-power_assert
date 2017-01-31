@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec::PowerAssert.example_assertion_alias :assert
 RSpec::PowerAssert.example_group_assertion_alias :assert
 
-describe Rspec::PowerAssert do
+describe RSpec::PowerAssert do
   describe Array do
     describe "#map" do
       let(:array) { [1, 2, 3] }
