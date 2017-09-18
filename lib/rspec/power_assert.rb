@@ -3,7 +3,7 @@ require "rspec/core"
 require "power_assert"
 
 module PowerAssert
-  INTERNAL_LIB_DIRS[RSpec::PowerAssert]  = __dir__
+  INTERNAL_LIB_DIRS[RSpec::PowerAssert]  = File.dirname(caller_locations(1, 1).first.path)
 end
 
 module RSpec
