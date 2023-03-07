@@ -109,18 +109,6 @@ describe RSpec::PowerAssert do
   end
 
   describe Object do
-    before do
-      PowerAssert.configure do |c|
-        c._trace_alias_method = true
-      end
-    end
-
-    after do
-      PowerAssert.configure do |c|
-        c._trace_alias_method = false
-      end
-    end
-
     let(:object) {
       Class.new {
         def foo
