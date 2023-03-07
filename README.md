@@ -3,6 +3,7 @@
 
 ## Support
 - RSpec 2.14 or later
+- If you use ruby-3.2.x or later, please use rspec-power_assert-1.2.0 or later
 
 ## Installation
 
