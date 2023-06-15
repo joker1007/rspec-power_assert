@@ -1,6 +1,7 @@
 require "rspec/power_assert/version"
 require "rspec/core"
 require "power_assert"
+require "securerandom"
 
 module PowerAssert
   INTERNAL_LIB_DIRS[RSpec::PowerAssert]  = File.dirname(caller_locations(1, 1).first.path)
@@ -37,9 +38,17 @@ module RSpec
 
     private
 
+    def change_context(&blk)
+      self_name = :"_#{SecureRandom.hex}"
+      blk_name = :"_#{SecureRandom.hex}"
+      bind = blk.binding
+      bind.local_variable_set(self_name, self)
+      bind.local_variable_set(blk_name, blk)
+      bind.eval("-> { #{self_name}.instance_exec(&#{blk_name}) }")
+    end
+
     def evaluate_example(method_name, &blk)
-      # hack for context changing
-      pr = -> { self.instance_exec(&blk) }
+      pr = change_context(&blk)
 
       result, msg = ::PowerAssert.start(pr, assertion_method: method_name) do |tp|
         [tp.yield, tp.message_proc.call]
